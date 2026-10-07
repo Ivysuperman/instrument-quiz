@@ -1,0 +1,239 @@
+{
+ "_meta": {
+  "version": "2.0",
+  "note": "逐条核实授权后的最终音频集。统一响度（目标 RMS -20dBFS / 峰值天花板 -1.5dBFS），统一裁切 10 秒，首尾淡化。双格式：m4a(AAC) 给 iOS，mp3 兜底。",
+  "excluded": {
+   "kaval": "来源为 Internet Archive 的 unlockedrecordings（波士顿公共图书馆黑胶数字化），无 licenseurl，属仍在版权期内的商业唱片，不可用于公开网页。结果页自动隐藏播放键。"
+  },
+  "replaced": {
+   "handpan": "用户提供版本为 CC BY-NC-ND（ND 禁改编，裁剪即违规），改用项目原有 CC BY-SA 3.0 版本",
+   "kantele": "用户提供版本为 CC BY-NC（禁商用），改用项目原有 CC0 版本"
+  },
+  "attribution_required": true
+ },
+ "audio": {
+  "duduk": {
+   "m4a": "audio/duduk.m4a",
+   "mp3": "audio/duduk.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Duduk 3.wav",
+    "author": "juskiddink / Freesound",
+    "license": "CC BY 4.0",
+    "page": "https://freesound.org/people/juskiddink/sounds/184267/"
+   }
+  },
+  "nyckelharpa": {
+   "m4a": "audio/nyckelharpa.m4a",
+   "mp3": "audio/nyckelharpa.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Bakom ladan, polska från Järbo",
+    "author": "Statens musikverk / Wikimedia Commons",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:%22Bakom_ladan%22,_polska_fr%C3%A5n_J%C3%A4rbo_-_SMV_-_SVA_BA_0049_03.wav"
+   }
+  },
+  "guzheng": {
+   "m4a": "audio/guzheng.m4a",
+   "mp3": "audio/guzheng.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Senor Guzheng and the Happy Monks",
+    "author": "Antti Luode / Wikimedia Commons",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Senor_Guzheng_and_the_Happy_Monks_(Antti_Luode).mp3"
+   }
+  },
+  "kora": {
+   "m4a": "audio/kora.m4a",
+   "mp3": "audio/kora.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "17 - Cinus Laurent - Kora",
+    "author": "Cinus Laurent / Wikimedia Commons",
+    "license": "Free Art License (FAL)",
+    "page": "https://commons.wikimedia.org/wiki/File:17_-_Cinus_Laurent_-_Kora.ogg"
+   }
+  },
+  "hulusi": {
+   "m4a": "audio/hulusi.m4a",
+   "mp3": "audio/hulusi.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Chinese flute Hulusi",
+    "author": "iluppai / Wikimedia Commons",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chinese_flute_Hulusi.wav"
+   }
+  },
+  "kantele": {
+   "m4a": "audio/kantele.m4a",
+   "mp3": "audio/kantele.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "DIY kantele sample raw.ogg",
+    "author": "Olli Niemitalo",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File%3ADIY_kantele_sample_raw.ogg"
+   }
+  },
+  "handpan": {
+   "m4a": "audio/handpan.m4a",
+   "mp3": "audio/handpan.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Hang 2007 vertical.ogg",
+    "author": "Michael Paschko (Ixkeys) www.hangblog.org",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File%3AHang_2007_vertical.ogg"
+   }
+  },
+  "santur": {
+   "m4a": "audio/santur.m4a",
+   "mp3": "audio/santur.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Santur by Mohammad R Azadehfar.wav",
+    "author": "Mohammad R Azadehfar / Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Santur_by_Mohammad_R_Azadehfar.wav"
+   }
+  },
+  "kaval": null,
+  "steelpan": {
+   "m4a": "audio/steelpan.m4a",
+   "mp3": "audio/steelpan.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Bach Sinfonia 12 for steel pan.webm",
+    "author": "Andy Clayton / Wikimedia Commons",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bach_Sinfonia_12_for_steel_pan.webm"
+   }
+  },
+  "cajon": {
+   "m4a": "audio/cajon.m4a",
+   "mp3": "audio/cajon.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Cajon Recording-LOW (Sample #1)",
+    "author": "Freesound sample 214524",
+    "license": "CC BY 3.0",
+    "page": "https://freesound.org/s/214524/"
+   }
+  },
+  "marimba": {
+   "m4a": "audio/marimba.m4a",
+   "mp3": "audio/marimba.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Ave Marimba",
+    "author": "Kevin MacLeod / Wikimedia Commons",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ave_Marimba_(ISRC_USUAN1700024).mp3"
+   }
+  },
+  "tinwhistle": {
+   "m4a": "audio/tinwhistle.m4a",
+   "mp3": "audio/tinwhistle.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "celtic tin whistle (pennywhistle) in d.mp3",
+    "author": "luis_audp / Freesound",
+    "license": "CC BY 3.0",
+    "page": "https://freesound.org/people/luis_audp/sounds/250972/"
+   }
+  },
+  "kalimba_diatonic": {
+   "m4a": "audio/kalimba_diatonic.m4a",
+   "mp3": "audio/kalimba_diatonic.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Kalimba Scale Descending",
+    "author": "A_Curious_coder / Freesound",
+    "license": "CC0 1.0",
+    "page": "https://freesound.org/people/A_Curious_coder/sounds/537519/"
+   }
+  },
+  "charango": {
+   "m4a": "audio/charango.m4a",
+   "mp3": "audio/charango.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Charango_improv3.wav",
+    "author": "Bmangelo / Freesound",
+    "license": "CC0 1.0",
+    "page": "https://freesound.org/people/Bmangelo/sounds/466491/"
+   }
+  },
+  "morinkhuur": {
+   "m4a": "audio/morinkhuur.m4a",
+   "mp3": "audio/morinkhuur.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "morin khuur.wav",
+    "author": "Qleq / Freesound",
+    "license": "CC BY 4.0",
+    "page": "https://freesound.org/people/Qleq/sounds/677538/"
+   }
+  },
+  "siku": {
+   "m4a": "audio/siku.m4a",
+   "mp3": "audio/siku.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Panpipe Zampona sicu melody loop 100 bpm A",
+    "author": "CarlosCarty / Freesound",
+    "license": "CC BY 4.0",
+    "page": "https://freesound.org/people/CarlosCarty/sounds/463713/"
+   }
+  },
+  "glassharp": {
+   "m4a": "audio/glassharp.m4a",
+   "mp3": "audio/glassharp.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "The Fixed Stars, the Frontier to the Beyond",
+    "author": "William Zeitler / Wikimedia Commons",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Stars-GlassArmonica.ogg"
+   }
+  },
+  "ocarina": {
+   "m4a": "audio/ocarina.m4a",
+   "mp3": "audio/ocarina.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "File:Ocarinasample.ogg",
+    "author": "Ailes Grises at English Wikipedia",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File%3AOcarinasample.ogg"
+   }
+  },
+  "hangdrum_bass": {
+   "m4a": "audio/hangdrum_bass.m4a",
+   "mp3": "audio/hangdrum_bass.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Udu Loop 80 BPM",
+    "author": "ultradust / Freesound",
+    "license": "CC BY 4.0",
+    "page": "https://freesound.org/people/ultradust/sounds/167182/"
+   }
+  },
+  "jawharp": {
+   "m4a": "audio/jawharp.m4a",
+   "mp3": "audio/jawharp.mp3",
+   "duration": 10.0,
+   "credit": {
+    "file": "Jaw HARP / trompe / arpa de boca /",
+    "author": "Atilio_Sanchez / Freesound",
+    "license": "CC BY 4.0",
+    "page": "https://freesound.org/people/Atilio_Sanchez/sounds/823156/"
+   }
+  }
+ }
+}
