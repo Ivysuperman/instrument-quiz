@@ -72,6 +72,20 @@ body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
 .btn.ghost{background:transparent;border:1px solid var(--band);
   color:var(--muted);letter-spacing:.12em;text-indent:.12em;font-size:15px}
 .note{text-align:center;font-size:12.5px;color:var(--muted);margin-top:14px}
+/* ---------- 分享面板 ---------- */
+/* 预览图用普通 <img>/<video> 直接渲染，不走 fetch ——
+   微信内置浏览器屏蔽了 a[download]，navigator.share 也没有，
+   那里唯一能存下来的办法就是长按图片。所以预览必须先出现、且永远可用，
+   「下载 / 系统分享」只作为桌面与外部浏览器的增强。 */
+.shbox{margin-top:18px;display:none}
+.shbox.on{display:block}
+.shbox .pv{width:100%;border-radius:var(--r);display:block;
+  background:rgba(255,255,255,.4);box-shadow:0 10px 30px rgba(87,80,71,.10)}
+.shtip{font-size:13px;line-height:1.85;color:var(--muted);text-align:center;
+  margin:14px 0 4px}
+.shtip b{color:var(--ink);font-weight:500}
+.shwarn{font-size:12px;line-height:1.8;color:var(--muted);text-align:center;
+  background:rgba(217,201,173,.3);border-radius:10px;padding:10px 12px;margin-top:12px}
 .s0foot{margin-top:auto;padding-top:40px}
 
 /* ---------- S1 答题 ---------- */
@@ -183,15 +197,16 @@ body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
 .story .sb{font-size:15.5px;line-height:27px}
 .tv{background:rgba(217,201,173,.32);border-radius:12px;padding:16px;margin-top:14px}
 .tv .sb{font-size:15px;line-height:26px}
+/* 搭档卡是展示性的，不可点击。
+   早先它点进去会 renderResult(搭档)，于是顶部还写着"和你最匹配的乐器是"，
+   图和称号却换成了另一件乐器 —— 用户会以为自己的结果被改掉了。 */
 .pt{display:flex;align-items:center;gap:14px;padding:14px;
-  background:rgba(217,201,173,.32);border-radius:var(--r);cursor:pointer;
-  transition:transform .14s}
-.pt:active{transform:scale(.985)}
+  background:rgba(217,201,173,.32);border-radius:var(--r);
+  cursor:default;user-select:none}
 .pt img{width:52px;height:52px;object-fit:cover;border-radius:11px;flex:0 0 52px;
-  background:rgba(255,255,255,.4)}
+  background:rgba(255,255,255,.4);pointer-events:none}
 .pt .pn{font-size:16px}
 .pt .po{font-size:12px;color:var(--muted);margin-top:2px}
-.pt .ar{margin-left:auto;color:var(--muted);font-size:20px}
 .axes{margin-top:30px;padding-top:26px;border-top:1px solid var(--hair)}
 .cred{font-size:11.5px;color:var(--muted);line-height:1.8;margin-top:22px;
   padding-top:18px;border-top:1px solid var(--hair)}
@@ -512,9 +527,9 @@ function renderResult(res){
      '<div class="tv"><div class="sh">冷 知 识</div><div class="sb">'+esc(it.trivia)+'</div></div></div>';
   h+='<div class="sec"><div class="sh">试 着 去 听</div><div class="sb">'+esc(it.listen)+'</div></div>';
   h+='<div class="sec"><div class="sh">你 的 合 奏 搭 档</div>'+
-     '<div class="pt" id="ptb"><img src="img/'+p.id+'_t.jpg" alt="" width="240" height="240">'+
+     '<div class="pt"><img src="img/'+p.id+'_t.jpg" alt="" width="240" height="240">'+
      '<div><div class="pn">'+esc(p.name_zh)+'</div>'+
-     '<div class="po">'+esc(p.org||p.origin)+'</div></div><span class="ar">›</span></div></div>';
+     '<div class="po">'+esc(p.org||p.origin)+'</div></div></div></div>';
   h+=axesHtml(s);
   if(it.audio){
     var c=it.audio.cr;
@@ -523,31 +538,103 @@ function renderResult(res){
        '<a href="'+c.p+'" target="_blank" rel="noopener">维基共享资源原文件页</a></details>';
   }
   h+='<div class="acts">'+
-     '<button class="btn" id="shb">保存 / 分享我的音色</button>'+
+     '<button class="btn" id="shpic">保存分享图</button>'+
+     (it.audio?'<button class="btn" id="shmp4">保存有声版</button>':'')+
+     '<div class="shbox" id="shbox"></div>'+
+     '<button class="btn ghost" id="shlink">复制测试链接</button>'+
      '<button class="btn ghost" id="glb">看看全部 21 种音色</button>'+
      '<button class="btn ghost" id="rt">重新测一次</button></div>';
   h+='<div class="foot">找到你的灵魂乐器<br>乐器音频来自维基共享资源，CC / 公有领域授权</div>';
   $('#rc').innerHTML=h;
 
   if(it.audio) bindAudio($('#sndb'),it.audio);
-  var pt=$('#ptb'); if(pt) pt.onclick=function(){
-    stopAudio();
-    renderResult({id:it.partner,rare:!!I[it.partner].rare,sc:s});
-  };
   $('#glb').onclick=function(){ stopAudio(); renderGallery(); show('s4'); };
   $('#rt').onclick=function(){ stopAudio(); location.hash=''; st.i=0; st.ans=[]; show('s0'); };
-  $('#shb').onclick=function(){
-    var url=location.origin+location.pathname+'#r='+res.id;
-    if(navigator.share){
-      navigator.share({title:'找到你的灵魂乐器 · '+it.title,
-        text:it.verdict,url:url}).catch(function(){});
-    }else if(navigator.clipboard){
-      navigator.clipboard.writeText(url).then(function(){
-        var b=$('#shb'); var o=b.textContent;
-        b.textContent='链接已复制'; setTimeout(function(){b.textContent=o},1600);
-      });
+  bindShare(it);
+}
+
+/* ---------- 分享 ---------- */
+var IS_WX = /micromessenger/i.test(navigator.userAgent);
+var TEST_URL = location.origin + location.pathname;   // 不带 #r=，扫码/点链接的人从头开始测
+
+/* 把本地文件交给系统分享面板（iOS 15+ Safari 可直接「存储图像 / 存储视频」）。
+   canShare({files}) 必须先问 —— 直接调 share() 在不支持 files 的浏览器上会抛错，
+   而抛错时机在用户手势之后，补救不了。 */
+function trySystemShare(url, filename, mime, title){
+  if(!(window.File && navigator.canShare && navigator.share)) return Promise.resolve(false);
+  return fetch(url).then(function(r){ return r.blob() }).then(function(b){
+    var f=new File([b], filename, {type:mime});
+    if(!navigator.canShare({files:[f]})) return false;
+    return navigator.share({files:[f], title:title}).then(function(){return true},
+                                                          function(){return true});
+  }).catch(function(){ return false });   // file:// 下 fetch 会被拦，静默退回长按保存
+}
+
+function downloadFile(url, filename){
+  var a=document.createElement('a');
+  a.href=url; a.download=filename; a.rel='noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+function bindShare(it){
+  var box=$('#shbox'), shown=null;
+
+  function panel(kind){
+    if(shown===kind){ box.classList.remove('on'); box.innerHTML=''; shown=null; return; }
+    shown=kind;
+    var isPic = kind==='pic';
+    var src   = 'share/'+it.id+(isPic?'.jpg':'.mp4');
+    var name  = '我的灵魂乐器-'+it.name_zh+(isPic?'.jpg':'.mp4');
+    var h='';
+    if(isPic){
+      h+='<img class="pv" src="'+src+'" alt="'+esc(it.name_zh)+'分享图" width="1080" height="1960">';
+      h+='<div class="shtip"><b>长按图片</b>即可保存到相册，或直接转发<br>'+
+         '图里带二维码，别人扫一下就能测</div>';
     }else{
-      location.hash='r='+res.id;
+      h+='<video class="pv" src="'+src+'" poster="share/'+it.id+'.jpg" '+
+         'controls playsinline preload="none" width="1080" height="1960"></video>';
+      h+='<div class="shtip">一段 <b>10 秒的有声卡片</b>，存到相册会是一段视频<br>'+
+         '放出来就能听见'+esc(it.name_zh)+'的声音</div>';
+      if(IS_WX){
+        h+='<div class="shwarn">微信里不能直接保存视频。'+
+           '点右上角「···」→ 在浏览器打开，再回到这里保存。</div>';
+      }
+    }
+    h+='<button class="btn ghost" id="shdo" style="margin-top:14px">'+
+       (isPic?'用系统分享 / 下载图片':'用系统分享 / 下载视频')+'</button>';
+    box.innerHTML=h; box.classList.add('on');
+
+    $('#shdo').onclick=function(){
+      var b=this, old=b.textContent;
+      b.textContent='处理中…';
+      trySystemShare(src, name, isPic?'image/jpeg':'video/mp4',
+                     '找到你的灵魂乐器 · '+it.title)
+        .then(function(ok){
+          if(ok){ b.textContent=old; return; }
+          if(IS_WX){ b.textContent = isPic?'请改用长按图片保存':'请先在浏览器中打开';
+                     setTimeout(function(){b.textContent=old},2200); return; }
+          downloadFile(src, name);
+          b.textContent='已开始下载';
+          setTimeout(function(){b.textContent=old},2000);
+        });
+    };
+    box.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  $('#shpic').onclick=function(){ panel('pic') };
+  var m=$('#shmp4'); if(m) m.onclick=function(){ stopAudio(); panel('mp4') };
+
+  $('#shlink').onclick=function(){
+    var b=$('#shlink'), old=b.textContent;
+    function done(txt){ b.textContent=txt; setTimeout(function(){b.textContent=old},1800) }
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(TEST_URL).then(function(){ done('链接已复制') },
+                                                   function(){ done(TEST_URL) });
+    }else if(navigator.share){
+      navigator.share({title:'找到你的灵魂乐器', text:it.verdict, url:TEST_URL})
+        .catch(function(){});
+    }else{
+      done(TEST_URL);
     }
   };
 }
